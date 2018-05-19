@@ -39,6 +39,20 @@ public class Md5Files {
 		return false;
 	}
 
+	public static String stringCheckSum(byte[] digest) {
+		StringBuilder sb = new StringBuilder();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}
+		return sb.toString();
+	}
+
+	public static boolean checkFileHash(String md5, String filename) throws Exception {
+		byte[] createChecksum = createChecksum(filename);
+		String stringCheckSum = stringCheckSum(createChecksum);
+		return stringCheckSum.equals(md5);
+	}
+
 	private static byte[] createChecksum(String filename) throws Exception {
 		InputStream fis = new FileInputStream(filename);
 		byte[] buffer = new byte[1024];
