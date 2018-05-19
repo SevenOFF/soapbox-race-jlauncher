@@ -289,7 +289,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         messageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        messageLabel.setText("<html><b>SoapBox Race World Online Launcher beta v0.0.8</b></html>");
+        messageLabel.setText("<html><b>SoapBox Race World Online Launcher beta v0.0.9</b></html>");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -612,7 +612,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private void checkGameFile(String path) {
 		if (Main.checkGameMd5(path)) {
 			enableAll();
-			setMessage("SoapBox Race World Online Launcher beta v0.0.8");
+			setMessage("SoapBox Race World Online Launcher beta v0.0.9");
 		} else {
 			disableAll();
 			setErrorMessage("Invalid or modded game file!");
