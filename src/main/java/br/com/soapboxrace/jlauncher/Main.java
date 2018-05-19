@@ -1,14 +1,19 @@
 package br.com.soapboxrace.jlauncher;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import br.com.soapboxrace.jlauncher.swing.MainWindow;
 import br.com.soapboxrace.jlauncher.util.ConfigDao;
 import br.com.soapboxrace.jlauncher.util.CopyFiles;
 import br.com.soapboxrace.jlauncher.util.EmailValidator;
+import br.com.soapboxrace.jlauncher.util.HttpRequest;
 import br.com.soapboxrace.jlauncher.util.Md5Files;
 import br.com.soapboxrace.jlauncher.vo.ConfigVO;
+import br.com.soapboxrace.jlauncher.vo.RequestVO;
 import br.com.soapboxrace.jlauncher.vo.UserVO;
 
 public class Main {
@@ -79,6 +84,32 @@ public class Main {
 
 	public static boolean checkGameMd5(String filename) {
 		return Md5Files.checkExeFile(filename);
+	}
+
+	public static boolean checkGameFiles(String url) {
+		ConfigVO configVO = configDao.getConfig();
+		String gameExePath = configVO.getGameExePath();
+		HttpRequest httpRequest = new HttpRequest(url);
+		String fileCheckURL = httpRequest.getFileCheckURL();
+		RequestVO doRequest = httpRequest.doRequest(fileCheckURL);
+		String response = doRequest.getResponse();
+		File file = new File(gameExePath);
+		String path = file.getParentFile().getPath();
+		List<String> list = Arrays.asList(response.split("\\n"));
+		for (String string : list) {
+			String[] split = string.split(" ");
+			String md5Str = split[0];
+			String filename = path + "/" + split[1];
+			try {
+				if (!Md5Files.checkFileHash(md5Str, filename)) {
+					return false;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static boolean copyModules(String path) {

@@ -438,6 +438,11 @@ public class MainWindow extends javax.swing.JFrame {
 	}// GEN-LAST:event_changeGamePathButtonActionPerformed
 
 	private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_launchButtonActionPerformed
+		if (!Main.checkGameFiles(getUrl())) {
+			setErrorMessage("Can't login, modded game files");
+//			launchButton.setEnabled(false);
+			return;
+		}
 		String token = loginOkVO.getLoginToken();
 		String userId = loginOkVO.getUserId();
 		String srvStr = getUrl() + "/soapbox-race-core/Engine.svc";

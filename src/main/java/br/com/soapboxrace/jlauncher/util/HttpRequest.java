@@ -18,6 +18,13 @@ public class HttpRequest {
 		this.serverUrl = serverUrl;
 	}
 
+	public String getFileCheckURL() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(serverUrl);
+		stringBuilder.append("/soapbox-race-core/Engine.svc/GetFileHashes");
+		return stringBuilder.toString();
+	}
+
 	public String getLoginURL(UserVO userVO) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(serverUrl);
