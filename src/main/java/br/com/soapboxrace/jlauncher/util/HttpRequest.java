@@ -53,6 +53,7 @@ public class HttpRequest {
 			URL serverAuth = new URL(url);
 			HttpURLConnection serverCon = (HttpURLConnection) serverAuth.openConnection();
 			serverCon.setRequestMethod("GET");
+			serverCon.setRequestProperty("secret", "0148e7cc5b47aa2fb09c12caae2a4b65");
 			serverCon.setRequestProperty("Accept-Encoding", "gzip");
 			InputStream inputStream = null;
 			int responseCode = serverCon.getResponseCode();
