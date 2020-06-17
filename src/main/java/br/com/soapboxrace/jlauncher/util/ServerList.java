@@ -7,7 +7,7 @@ public class ServerList {
 	private HttpRequest httpRequest = new HttpRequest("");
 
 	public String[] getServerList() {
-		RequestVO doRequest = httpRequest.doRequest("https://raw.githubusercontent.com/nilzao/soapbox-race-hill/master/serverlist-v2.txt");
+		RequestVO doRequest = httpRequest.doRequest("https://raw.githubusercontent.com/SevenOFF/Soapbox-Launcher-Server-list/master/serverlist.txt");
 		String serverList[] = null;
 		if (doRequest.getResponseCode() == 200) {
 			String response = doRequest.getResponse();
